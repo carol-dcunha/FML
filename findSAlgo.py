@@ -2,7 +2,7 @@ import random
 
 attributes = [['Sunny','Rainy'],['Warm','Cold'],['Normal','High'],['Strong','Weak'],['Warm','Cool'],['Same','Change']]
 num_attributes=len(attributes)
-hp = ['$']*num_attributes
+hp = [0]*num_attributes
 
 
 def getRandomTrainingExample(target_concept=['?']*num_attributes):
@@ -17,8 +17,9 @@ def getRandomTrainingExample(target_concept=['?']*num_attributes):
 def findS(training_instance):
 	global hp
 	if training_instance[1]:
+		
 		print "x:\t",training_instance
-		if '$' in hp:
+		if 0 in hp:
 			hp=training_instance[0]
 		else:
 			for i in range(num_attributes):
@@ -31,7 +32,7 @@ def main():
 	target_concept=['Sunny','Warm','?','Strong','?','?']
 	num_experiments=15
 	training_examples=[]
-
+	print "H:\t",hp,"\n"
 	for i in range(num_experiments):
 		training_examples.append(getRandomTrainingExample(target_concept))
 		findS(training_examples[i])
