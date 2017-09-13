@@ -3,8 +3,8 @@ import random
 attributes = [['Sunny','Rainy'],['Warm','Cold'],['Normal','High'],['Strong','Weak'],['Warm','Cool'],['Same','Change']]
 num_attributes=len(attributes)
 
-S = [['0']*num_attributes]
-G = [['?']*num_attributes]
+S = [['0']*num_attributes] #initialise S
+G = [['?']*num_attributes] #initialise G
 
 
 def getRandomTrainingExample(target_concept=['?']*num_attributes):
