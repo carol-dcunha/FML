@@ -17,7 +17,8 @@ def getRandomTrainingExample(target_concept=['?']*num_attributes):
 	return training_example,classification
 
 
-
+#check if positive training example is consistent with G
+#remove inconsistent hypothesis' from G
 def pConsistent(instance):
 	global G
 	glist=[]
@@ -30,6 +31,8 @@ def pConsistent(instance):
 		G.remove(item)
 
 
+#check if negative training example is consistent with S
+#remove inconsistent hypothesis' from S
 def nConsistent(instance):
 	global S
 	slist=[]
@@ -45,13 +48,13 @@ def nConsistent(instance):
 		S.remove(item)
 
 
-
+#get other attributes values 
 def getOtherValues(index,value):
 	global attributes
 	return [x for x in attributes[index] if x!=value]
 
 
-
+#generalise hypothesis' in S wrt positive training example
 def generaliseS(instance):
 	global S
 	for sitem in S:
@@ -72,6 +75,7 @@ def generaliseS(instance):
 	S=newlist
 
 
+#specialise hypothesis' in G wrt negative training example
 def specialiseG(instance):
 	global G
 	glist=[]
@@ -99,11 +103,11 @@ def specialiseG(instance):
 	G=newlist
 
 
-
+#check if hypothesis' in G and S are consistent with each other
 def checkBoundaries(type):
 	global G,S
 
-	if type == "G":
+	if type == "G": #check if G is consistent with S for negative training example
 		glist=[] 
 		for gitem in G:
 			for sitem in S:
@@ -114,7 +118,7 @@ def checkBoundaries(type):
 		for item in glist:
 			G.remove(item)
 	
-	elif type == "S":
+	elif type == "S": #check if S is consistent with G for positive training example
 		slist=[]
 		for sitem in S:
 			for gitem in G:
@@ -125,13 +129,14 @@ def checkBoundaries(type):
 		for item in slist:
 			S.remove(item)
 	
+	#if either G or S is empty
 	if len(G)==0:
 		S=[]
 	elif len(S)==0:
 		G=[]
 
 
-
+#perform candidate elimination algorithm
 def CEA(instance,target):
 	global S,G
 	print "\nX:\t",instance,"\t",target,"\n"
@@ -163,3 +168,4 @@ def main():
 
 if __name__=="__main__":
 	main()
+
