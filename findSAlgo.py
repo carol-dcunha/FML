@@ -16,21 +16,20 @@ def getRandomTrainingExample(target_concept=['?']*num_attributes):
 
 def findS(training_instance):
 	global hp
+	print "x:\t",training_instance
 	if training_instance[1]:
-		
-		print "x:\t",training_instance
 		if 0 in hp:
 			hp=training_instance[0]
 		else:
 			for i in range(num_attributes):
 				if hp[i] != training_instance[0][i]:
 					hp[i]='?'
-		print "H:\t",hp,"\n"
+	print "H:\t",hp,"\n"
 
 
 def main():
 	target_concept=['Sunny','Warm','?','Strong','?','?']
-	num_experiments=15
+	num_experiments=10
 	training_examples=[]
 	print "H:\t",hp,"\n"
 	for i in range(num_experiments):
